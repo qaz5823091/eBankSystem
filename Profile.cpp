@@ -8,7 +8,19 @@ using namespace std;
 const double ANNUAL_RATE = 0.008;
 
 // new an account
-Profile::Profile() {
+Profile::Profile(string act, string pwd, double bal, char loc) {
+	bool isLocked;
+	if (loc == 'Y')
+		locked = true;
+	else
+		locked = false;
+
+	account = act;
+	password = pwd;
+	balance = bal;
+	interest = 0;
+	not_update_times = 0;
+	tried_times = 0;
 }
 
 string Profile::getAccount() {
@@ -35,10 +47,15 @@ int Profile::getTriedTimes() {
     return tried_times;
 }
 
+bool Profile::getLocked() {
+	return locked;
+}
+
 void Profile::setTriedTimes(int times) {
     tried_times = times;
 }
 
+/*
 void Profile::setInfo(string act, string pwd) {
     account = act;
     password = pwd;
@@ -58,7 +75,7 @@ void Profile::setInfo(string act, string pwd, double bal, double inte,
     not_update_times = nut;
     tried_times = tt;
     locked = loc;
-}
+}*/
 
 void Profile::deposit(double money) {
     balance += money;

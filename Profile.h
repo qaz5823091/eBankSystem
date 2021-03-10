@@ -15,18 +15,18 @@ class Profile {
         bool locked;
 
     public:
-        Profile();
+        Profile(string act, string pwd, double bal, char loc);
         string getAccount();
         string getPassword();
         double getBalance();
         double getInterest();
         int getNotUpdateTimes();
         int getTriedTimes();
+		bool getLocked();
 
         void setTriedTimes(int times);
-        void setInfo(string act, string pwd);
-        void setInfo(string act, string pwd, double bal, double inte,
-            int nut, int tt, bool loc);
+        //void setInfo(string act, string pwd);
+        //void setInfo(string act, string pwd, double bal, double inte, int nut, int tt, bool loc);
         void deposit(double money);
         void withdraw(double money);
         void print();

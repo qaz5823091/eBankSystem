@@ -31,13 +31,12 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="Interface.cpp" />
+		<Unit filename="Interface.h" />
+		<Unit filename="Profile.cpp" />
+		<Unit filename="Profile.h" />
 		<Unit filename="main.cpp" />
-		<Unit filename="profile.cpp" />
-		<Unit filename="profile.h" />
 		<Extensions>
-			<code_completion />
-			<envvars />
-			<debugger />
 			<lib_finder disable_auto="1" />
 		</Extensions>
 	</Project>

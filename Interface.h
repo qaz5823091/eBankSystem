@@ -4,22 +4,26 @@
 #include "Profile.h"
 #include <iostream>
 #include <string>
+#include <vector>
 using namespace std;
 
 class Interface {
     private:
         string command;
-        Profile profile;
+		int index;
+        vector<Profile> profile;
 
     public:
         Interface();
+		~Interface();
+		void load();
+		void dump();
         void login();
         void signUp();
         void logout();
-        void deposit(double money);
-        void withdraw(double money);
-        void display();
-
+        void deposit(int index, double money);
+        void withdraw(int index, double money);
+        void display(int index);
 };
 
 #endif // INTERFACE_H

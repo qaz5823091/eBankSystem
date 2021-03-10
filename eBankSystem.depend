@@ -23,3 +23,29 @@
 	"Profile.h"
 	<iostream>
 
+1615390146 source:d:\code blocks\ebanksystem-main\main.cpp
+	"Interface.h"
+
+1615390148 d:\code blocks\ebanksystem-main\profile.h
+	<string>
+
+1615390150 d:\code blocks\ebanksystem-main\interface.h
+	"Profile.h"
+	<iostream>
+	<string>
+	<vector>
+
+1615390147 source:d:\code blocks\ebanksystem-main\profile.cpp
+	"Profile.h"
+	<iostream>
+	<iomanip>
+	<string>
+
+1615390149 source:d:\code blocks\ebanksystem-main\interface.cpp
+	"Interface.h"
+	"Profile.h"
+	<iomanip>
+	<iostream>
+	<vector>
+	<fstream>
+
