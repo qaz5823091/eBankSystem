@@ -24,7 +24,8 @@ class Profile {
         int getTriedTimes();
 		bool getLocked();
 
-        void setTriedTimes(int times);
+		void setTriedTimes(int times);
+        void setLocked(bool isLocked);
         //void setInfo(string act, string pwd);
         //void setInfo(string act, string pwd, double bal, double inte, int nut, int tt, bool loc);
         void deposit(double money);
