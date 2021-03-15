@@ -9,7 +9,6 @@ const double ANNUAL_RATE = 0.008;
 
 // new an account
 Profile::Profile(string act, string pwd, double bal, char loc) {
-	bool isLocked;
 	if (loc == 'Y')
 		locked = true;
 	else
@@ -55,6 +54,10 @@ void Profile::setTriedTimes(int times) {
     tried_times = times;
 }
 
+void Profile::setLocked(bool isLocked){
+	locked = isLocked;
+}
+
 /*
 void Profile::setInfo(string act, string pwd) {
     account = act;
@@ -79,6 +82,7 @@ void Profile::setInfo(string act, string pwd, double bal, double inte,
 
 void Profile::deposit(double money) {
     balance += money;
+	not_update_times++;
     cout<<fixed<<setprecision(2)<<"Deposit "<<money<<" dollars"<<endl;
 }
 
@@ -89,6 +93,7 @@ void Profile::withdraw(double money) {
     }
 
     balance -= money;
+	not_update_times++;
     cout<<fixed<<setprecision(2)<<"Withdraw "<<money<<" dollars"<<endl;
 }
 
