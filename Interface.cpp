@@ -6,24 +6,25 @@
 #include <fstream>
 using namespace std;
 
+const int totalTryTimes = 3;
+const int tradeTimes = 3;
+
 Interface::Interface() {
 	load();
+	
+	cout<<"=============================="<<endl;
+	cout<<"login or signup"<<endl;
+	cout<<"Command > ";
+	cin>>command;
 
-	while (1) {
-		cout<<"=============================="<<endl;
-		cout<<"login or signup"<<endl;
-		cout<<"Command > ";
-		cin>>command;
-
-		if (command == "login")
-			login();
-		else if (command == "signup")
-			signUp();
-		else if (command == "exit")
-			return ;
-		else
-			cout<<"Unknown command!"<<endl;
-	}
+	if (command == "login")
+		login();
+	else if (command == "signup")
+		signUp();
+	else if (command == "exit")
+		return ;
+	else
+		cout<<"Unknown command!"<<endl;
 }
 
 Interface::~Interface(){
@@ -33,14 +34,14 @@ Interface::~Interface(){
 void Interface::load() {
 	fstream fileIn;
 	fileIn.open("userFile.txt");
-
+	
 	string act, pwd;
 	double bal;
 	char loc;
 	while (fileIn>>act>>pwd>>bal>>loc) {
 		profile.push_back( Profile(act, pwd, bal, loc) );
 	}
-
+	
 	fileIn.close();
 }
 
@@ -48,7 +49,7 @@ void Interface::dump() {
 	fstream fileOut;
 	fileOut.open("userFile.txt");
 	// fileOut == cout
-
+	
 	for (int i=0;i<profile.size();i++) {
 		char isLocked;
 		if (profile[i].getLocked())
@@ -72,24 +73,36 @@ void Interface::login() {
 	bool isLogin = false;
 	for (int i=0;i<profile.size();i++) {
 		if ( account == profile[i].getAccount() ) {
-			cout<<"Password: ";
-			cin>>password;
-			if ( password == profile[i].getPassword() ) {
-				isLogin = true;
-				index = i;
-				break;
-			}
-			else {
+			index = i;
+
+			if ( profile[i].getLocked() ) {
 				isLogin = false;
 				break;
 			}
+
+			for (int tryTimes = 1;tryTimes <= totalTryTimes;tryTimes++) {
+				cout<<"Password: ";
+				cin>>password;
+				if ( password == profile[i].getPassword() ) {
+					isLogin = true;
+					break;
+				}
+				else {
+					profile[i].setTriedTimes(tryTimes);
+					cout<<"You have "<<totalTryTimes-tryTimes<<" tried times !"<<endl;
+				}
+			}
+
+			break;
 		}
 	}
 
-	if ( isLogin == false ) {
+	if ( isLogin == false && profile[index].getTriedTimes() == totalTryTimes ) {
 		cout<<"Login failed, Try again"<<endl;
 		return ;
 	}
+    
+	
 
     while (1) {
 		cout<<"=============================="<<endl;
@@ -97,9 +110,19 @@ void Interface::login() {
         cout<<"Command > ";
 		cin>>command;
 
+		if(profile[index].getNotUpdateTimes()>=tradeTimes){
+			profile[index].setLocked(true);
+		}
+
 		double money;
 
-        if (command == "logout") {
+		if ( profile[index].getLocked() ) {
+			display(index);
+			cout<<endl<<"You've been locked out"<<endl;
+			logout();
+			break;
+		}
+        else if (command == "logout") {
             logout();
 			break;
         }
@@ -158,6 +181,7 @@ void Interface::signUp() {
 }
 
 void Interface::logout() {
+	profile[index].setLocked(false);
     // file out
 	dump();
     cout<<"Bye bye!"<<endl;
