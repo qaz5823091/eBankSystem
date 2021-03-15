@@ -18,12 +18,14 @@ class Interface {
 		~Interface();
 		void load();
 		void dump();
+
         void login();
         void signUp();
         void logout();
         void deposit(int index, double money);
         void withdraw(int index, double money);
         void display(int index);
+
 };
 
 #endif // INTERFACE_H
