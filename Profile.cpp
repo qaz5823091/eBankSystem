@@ -98,11 +98,10 @@ void Profile::withdraw(double money) {
 }
 
 void Profile::print() {
-    cout<<"=================================="<<endl;
+    cout<<"=============================="<<endl;
     cout<<"Account:  "<<account<<endl;
     cout<<"Password: "<<password<<endl;
-    cout<<fixed<<setprecision(2)<<"Deposit:  "<<balance<<endl;
+    cout<<fixed<<setprecision(2)<<"Balance:  "<<balance<<endl;
     cout<<fixed<<setprecision(2)<<"Interest: "<<interest<<endl;
     cout<<"Locked:   "<<locked<<endl;
-    cout<<"=================================="<<endl;
 }

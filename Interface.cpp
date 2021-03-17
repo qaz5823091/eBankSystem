@@ -2,6 +2,7 @@
 #include "Profile.h"
 #include <iomanip>
 #include <iostream>
+#include <string>
 #include <vector>
 #include <fstream>
 using namespace std;
@@ -11,7 +12,7 @@ const int tradeTimes = 3;
 
 Interface::Interface() {
 	load();
-	
+
 	cout<<"=============================="<<endl;
 	cout<<"login or signup"<<endl;
 	cout<<"Command > ";
@@ -34,14 +35,14 @@ Interface::~Interface(){
 void Interface::load() {
 	fstream fileIn;
 	fileIn.open("userFile.txt");
-	
+
 	string act, pwd;
 	double bal;
 	char loc;
 	while (fileIn>>act>>pwd>>bal>>loc) {
 		profile.push_back( Profile(act, pwd, bal, loc) );
 	}
-	
+
 	fileIn.close();
 }
 
@@ -49,7 +50,7 @@ void Interface::dump() {
 	fstream fileOut;
 	fileOut.open("userFile.txt");
 	// fileOut == cout
-	
+
 	for (int i=0;i<profile.size();i++) {
 		char isLocked;
 		if (profile[i].getLocked())
@@ -101,8 +102,8 @@ void Interface::login() {
 		cout<<"Login failed, Try again"<<endl;
 		return ;
 	}
-    
-	
+
+
 
     while (1) {
 		cout<<"=============================="<<endl;
